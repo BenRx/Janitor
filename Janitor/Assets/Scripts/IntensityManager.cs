@@ -5,17 +5,20 @@ using UnityEngine;
 public class IntensityManager : MonoBehaviour
 {
     private Light lightToFade;
-    public float FadeTimeBPM;
-    public float fadeWaitTime;
+    public float BPM;
     public float fadeOutCoef;
     public float minLuminosity;
     public float maxLuminosity;
 
+    private float deltaDuration;
+
+
     void Start()
     {
         lightToFade = GetComponent<Light>();
-        float FadeTimeSecond = (60 / FadeTimeBPM) * 4;
-        StartCoroutine(fadeInAndOutRepeat(lightToFade, FadeTimeSecond, fadeWaitTime));
+        float repeatValue = (60 / BPM); // Rythm var : /4 - croche | *4 - 4 Temps | O - Blanche
+
+        StartCoroutine(fadeInAndOutRepeat(lightToFade, repeatValue, repeatValue));
     }
 
     IEnumerator fadeInAndOutRepeat(Light lightToFade, float duration, float waitTime)
