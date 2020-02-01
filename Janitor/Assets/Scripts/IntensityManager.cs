@@ -32,6 +32,7 @@ public class IntensityManager : MonoBehaviour
             yield return fadeInAndOut(lightToFade, true, duration);
         }
     }
+    
     IEnumerator fadeInAndOut(Light lightToFade, bool fadeIn, float duration)
     {
         float counter = 0f;
