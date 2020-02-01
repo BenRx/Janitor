@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Light
+  - PickUpZone
+  - PickDownLight
+  - PickDownInterupt
+  - Case
+  - Case1
   layers:
   - Default
   - TransparentFX
@@ -13,8 +19,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - GlowStick
+  - PickUp
   - 
   - 
   - 
