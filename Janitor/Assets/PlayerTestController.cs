@@ -15,6 +15,8 @@ public class PlayerTestController : MonoBehaviour
     public float sanityMax = 200f;
     public float sanityGain = 0f;
     private Rigidbody rb;
+
+    public float maxSpeed = 20f;
     public float speed = 10f;
     public float jumpSpeed = 100f;
     public GameObject GlowStick;
@@ -39,13 +41,13 @@ public class PlayerTestController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") > 0) {
-            rb.velocity = Vector3.right * speed * Time.deltaTime;
-        } else if (Input.GetAxisRaw("Horizontal") < 0) {
-            rb.velocity = Vector3.left * speed * Time.deltaTime;
+        if (Input.GetAxisRaw("Horizontal") > 0.5f && rb.velocity.x < maxSpeed) {
+            rb.AddForce(Vector3.right * speed);
+        } else if (Input.GetAxisRaw("Horizontal") < -0.5f && rb.velocity.x < maxSpeed) {
+            rb.AddForce(Vector3.left * speed);
         }
         if (Input.GetButtonDown("Jump")) {
-            rb.velocity = Vector3.up * jumpSpeed;
+            rb.AddForce(Vector3.up * jumpSpeed);
         }
         TimeBeforeFearMax -= Time.deltaTime;
         if (TimeBeforeFearMax < 0.5)
@@ -67,5 +69,15 @@ public class PlayerTestController : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void OnCollisionStay(Collision other) {
+        if (other.gameObject.tag == "Case") {
+            if (Input.GetAxisRaw("Horizontal") > 0.5f && rb.velocity.x < maxSpeed) {
+                rb.AddForce(Vector3.right * speed);
+            } else if (Input.GetAxisRaw("Horizontal") < -0.5f && rb.velocity.x < maxSpeed) {
+                rb.AddForce(Vector3.left * speed);
+            }
+        }
     }
 }
