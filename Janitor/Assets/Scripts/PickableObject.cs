@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PickableObject : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class PickableObject : MonoBehaviour
         if (imPick && !imLight && other.tag == "PickDownInterupt") {
             gameObject.transform.position = other.gameObject.transform.position;
             gameObject.transform.parent = other.gameObject.transform;
+            SceneManager.LoadScene("End", LoadSceneMode.Single);   
         }
     }
 }
