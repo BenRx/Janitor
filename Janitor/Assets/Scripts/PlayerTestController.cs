@@ -19,6 +19,8 @@ public class PlayerTestController : MonoBehaviour
     public GameObject GlowStick;
     private Rigidbody rb;
     private Vector3 initialPosition;
+    private float initialTime;
+    private float currentTime;
 
     void Awake()
     {
@@ -37,11 +39,13 @@ public class PlayerTestController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Physics.IgnoreLayerCollision(0, 8);
         initialPosition = transform.position;
+        initialTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentTime = Time.time - initialTime;
         if (Input.GetAxisRaw("Horizontal") > 0.5f && rb.velocity.x < maxSpeed) {
             rb.AddForce(Vector3.right * speed);
         } else if (Input.GetAxisRaw("Horizontal") < -0.5f && rb.velocity.x < maxSpeed) {
@@ -49,6 +53,9 @@ public class PlayerTestController : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump")) {
             rb.AddForce(Vector3.up * jumpSpeed);
+        } 
+        if (Input.GetButtonDown("Submit") || Input.GetKeyDown(KeyCode.R)) {
+            ResetPlayer();
         }
         ManageSanity();
         ManageFear();
@@ -56,7 +63,7 @@ public class PlayerTestController : MonoBehaviour
 
     void ManageFear() {
         if (fearLvl < 100) {
-            fearLvl = Time.time / fearCoef;
+            fearLvl = currentTime / fearCoef;
         }
     }
 
@@ -70,6 +77,7 @@ public class PlayerTestController : MonoBehaviour
         transform.position = initialPosition;
         sanity = 100f;
         fearLvl = 0;
+        initialTime = Time.time;
     }
 
     public bool PickMe(GameObject gm) {
@@ -77,17 +85,13 @@ public class PlayerTestController : MonoBehaviour
             gm.transform.position = new Vector3(GlowStick.transform.position.x + 0.3f, GlowStick.transform.position.y, GlowStick.transform.position.z);
             gm.transform.parent = GlowStick.transform;
             return true;
-        } else if (Input.GetButtonDown("Submit")) {
-            ResetPlayer();
         }
         return false;
     }
 
     private void OnCollisionStay(Collision other) {
         if (other.gameObject.tag == "Case") {
-            Debug.Log("wut");
             if (Input.GetAxisRaw("Horizontal") > 0.5f ) {
-                Debug.Log("ayaya");
                 rb.AddForce(Vector3.right * speed * 2f);
             } else if (Input.GetAxisRaw("Horizontal") < -0.5f ) {
                 rb.AddForce(Vector3.left * speed * 2f);
