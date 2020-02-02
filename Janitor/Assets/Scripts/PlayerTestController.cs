@@ -76,10 +76,7 @@ public class PlayerTestController : MonoBehaviour
     }
 
     public void ResetPlayer() {
-        transform.position = initialPosition;
-        sanity = 100f;
-        fearLvl = 0;
-        initialTime = Time.time;
+        Application.LoadLevel (Application.loadedLevel);
     }
 
     public bool PickMe(GameObject gm) {
