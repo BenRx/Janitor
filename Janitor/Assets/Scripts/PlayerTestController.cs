@@ -12,14 +12,13 @@ public class PlayerTestController : MonoBehaviour
     public float sanity = 100f;
     public float fearLvl = 0;
     public float fearCoef = 4;
-
     public bool isInSafeZone = true;
-    private Rigidbody rb;
     public float maxSpeed = 20f;
     public float speed = 10f;
     public float jumpSpeed = 100f;
     public GameObject GlowStick;
-    public float sanityGain = 0f;
+    private Rigidbody rb;
+    private Vector3 initialPosition;
 
     void Awake()
     {
@@ -37,6 +36,7 @@ public class PlayerTestController : MonoBehaviour
         layer = ~layer;
         rb = GetComponent<Rigidbody>();
         Physics.IgnoreLayerCollision(0, 8);
+        initialPosition = transform.prosition;
     }
 
     // Update is called once per frame
@@ -66,11 +66,19 @@ public class PlayerTestController : MonoBehaviour
         }
     }
 
+    void ResetPlayer() {
+        transform.prosition = initialPosition;
+        sanity = 100f;
+        fearLvl = 0;
+    }
+
     public bool PickMe(GameObject gm) {
         if (Input.GetButtonDown("Fire1")) {
             gm.transform.position = new Vector3(GlowStick.transform.position.x + 0.3f, GlowStick.transform.position.y, GlowStick.transform.position.z);
             gm.transform.parent = GlowStick.transform;
             return true;
+        } else if (Input.GetButtonDown("Submit")) {
+            ResetPlayer();
         }
         return false;
     }
