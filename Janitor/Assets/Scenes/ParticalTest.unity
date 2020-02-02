@@ -35477,6 +35477,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1324269675}
+  - component: {fileID: 1324269677}
+  - component: {fileID: 1324269676}
   m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
@@ -35499,6 +35501,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
+--- !u!65 &1324269676
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324269674}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3006897, y: 11.9703865, z: 8.397667}
+  m_Center: {x: -39.4871, y: 5.4851933, z: 3.698834}
+--- !u!65 &1324269677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324269674}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.7682316, y: 11.935207, z: 7.8825283}
+  m_Center: {x: 3.5308871, y: 5.4676037, z: 3.4412642}
 --- !u!4 &1327452508 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2b42d84929f44cf4790c13f564b7236a,
