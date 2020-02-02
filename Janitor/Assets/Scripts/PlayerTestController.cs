@@ -75,7 +75,7 @@ public class PlayerTestController : MonoBehaviour
         }
     }
 
-    void ResetPlayer() {
+    public void ResetPlayer() {
         transform.position = initialPosition;
         sanity = 100f;
         fearLvl = 0;
