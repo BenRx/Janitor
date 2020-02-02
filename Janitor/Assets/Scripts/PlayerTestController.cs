@@ -21,7 +21,8 @@ public class PlayerTestController : MonoBehaviour
     private Vector3 initialPosition;
     private float initialTime;
     private float currentTime;
-
+    private Animator animator;
+    private bool isPush = false;
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -29,7 +30,7 @@ public class PlayerTestController : MonoBehaviour
             Destroy(this.gameObject);
         } else {
             _instance = this;
-        }    
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,13 @@ public class PlayerTestController : MonoBehaviour
         Physics.IgnoreLayerCollision(0, 8);
         initialPosition = transform.position;
         initialTime = Time.time;
+        animator = GetComponentInChildren<Animator>();
     }
+
+    private bool IsGrounded() {
+       return Physics.Raycast(transform.position, -Vector3.up, 1.0f + 0.1f);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -51,16 +58,20 @@ public class PlayerTestController : MonoBehaviour
         } else if (Input.GetAxisRaw("Horizontal") < -0.5f && rb.velocity.x < maxSpeed) {
             rb.AddForce(Vector3.left * speed);
         }
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && IsGrounded()) {
             rb.AddForce(Vector3.up * jumpSpeed);
         } 
         if (Input.GetButtonDown("Submit") || Input.GetKeyDown(KeyCode.R)) {
             ResetPlayer();
         }
+        animator.SetFloat("Speed", rb.velocity.x);
+        animator.SetBool("isGrounded", IsGrounded());
+        animator.SetBool("IsPush", isPush);
         ManageSanity();
         ManageFear();
     }
 
+ 
     void ManageFear() {
         if (fearLvl < 100) {
             fearLvl = currentTime / fearCoef;
@@ -98,6 +109,24 @@ public class PlayerTestController : MonoBehaviour
             } else if (Input.GetAxisRaw("Horizontal") < -0.5f ) {
                 rb.AddForce(Vector3.left * speed * 2f);
             }
+        // Debug-draw all contact points and normals
+            foreach (ContactPoint contact in other.contacts)
+            {
+                Debug.Log(contact.normal);
+                Debug.Log(contact.normal.y > -1.5f && contact.normal.y < 1.5f);
+                if (contact.normal.y > -1.5f  && contact.normal.y < -0.5 || contact.normal.y > 0.5 && contact.normal.y < 1.5f) {
+                    isPush = false;
+                    return;
+                }
+                else{
+                    Debug.Log("NIOIIIIQUE");
+                    isPush = true;
+                    return;
+                }
+            }
+        }
+        else {
+            isPush = false;
         }
     }
 }
