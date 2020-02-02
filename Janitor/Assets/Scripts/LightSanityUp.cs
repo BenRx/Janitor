@@ -4,22 +4,9 @@ using UnityEngine;
 
 public class LightSanityUp : MonoBehaviour
 {
-    public float exteriorLightGainSanity;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
-            //PlayerTestController.Instance.sanityGain = exteriorLightGainSanity;
+            PlayerTestController.Instance.isInSafeZone = true;
             Debug.Log("J'entre");
         }
     }
@@ -27,15 +14,8 @@ public class LightSanityUp : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player") {
-            //PlayerTestController.Instance.sanityGain = 0;
+            PlayerTestController.Instance.isInSafeZone = false;
             Debug.Log("J'sort");
         }
-    }
-
-    private void OnTriggerStay(Collider other) {
-         if (other.tag == "Player") {
-            //PlayerTestController.Instance.sanityGain = exteriorLightGainSanity;
-            Debug.Log("J'entre");
-        }   
     }
 }

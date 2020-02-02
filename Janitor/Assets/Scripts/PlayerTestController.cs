@@ -12,7 +12,7 @@ public class PlayerTestController : MonoBehaviour
     public float sanity = 100f;
     public float fearLvl = 0;
     public float fearCoef = 4;
-    public bool isInSafeZone = true;
+    public bool isInSafeZone = false;
     public float maxSpeed = 20f;
     public float speed = 10f;
     public float jumpSpeed = 100f;
@@ -70,6 +70,8 @@ public class PlayerTestController : MonoBehaviour
     void ManageSanity() {
         if (!isInSafeZone && sanity > 0) {
             sanity -= fearLvl / 2;
+        } else if (isInSafeZone && sanity < 100) {
+            sanity += 2;
         }
     }
 
