@@ -80,6 +80,9 @@ public class PlayerTestController : MonoBehaviour
     }
 
     void ManageSanity() {
+        if (sanity == 0) {
+            ResetPlayer();
+        }
         if (!isInSafeZone && sanity > 0) {
             sanity -= fearLvl / sanityCoef;
         } else if (isInSafeZone && sanity < 100) {
