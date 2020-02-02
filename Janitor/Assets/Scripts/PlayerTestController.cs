@@ -16,6 +16,7 @@ public class PlayerTestController : MonoBehaviour
     public float maxSpeed = 20f;
     public float speed = 10f;
     public float jumpSpeed = 100f;
+    public int sanityCoef = 6;
     public GameObject GlowStick;
     private Rigidbody rb;
     private Vector3 initialPosition;
@@ -80,7 +81,7 @@ public class PlayerTestController : MonoBehaviour
 
     void ManageSanity() {
         if (!isInSafeZone && sanity > 0) {
-            sanity -= fearLvl / 2;
+            sanity -= fearLvl / sanityCoef;
         } else if (isInSafeZone && sanity < 100) {
             sanity += 2;
         }
