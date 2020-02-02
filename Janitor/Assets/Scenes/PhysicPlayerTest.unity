@@ -766,20 +766,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTest
       objectReference: {fileID: 0}
-    - target: {fileID: 4960697139842698078, guid: eb5e6cf1b3c2bec4a8b1111a587c6e6a,
-        type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4960697139842698078, guid: eb5e6cf1b3c2bec4a8b1111a587c6e6a,
-        type: 3}
-      propertyPath: jumpSpeed
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 4960697139842698078, guid: eb5e6cf1b3c2bec4a8b1111a587c6e6a,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb5e6cf1b3c2bec4a8b1111a587c6e6a, type: 3}

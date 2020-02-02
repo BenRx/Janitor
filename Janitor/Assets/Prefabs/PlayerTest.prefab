@@ -512,8 +512,11 @@ MonoBehaviour:
   sanity: 100
   sanityMax: 200
   sanityGain: 0
-  speed: 200
-  jumpSpeed: 10
+  fearLvl: 0
+  fearCoef: 4
+  maxSpeed: 1.5
+  speed: 5
+  jumpSpeed: 250
   GlowStick: {fileID: 38063956}
 --- !u!54 &4960697139842698020
 Rigidbody:
