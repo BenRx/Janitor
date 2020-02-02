@@ -17,6 +17,5 @@ public class FearBarManager : MonoBehaviour
     void Update()
     {
         fearBar.value = player.fearLvl;
-        Debug.Log(player.fearLvl);
     }
 }
