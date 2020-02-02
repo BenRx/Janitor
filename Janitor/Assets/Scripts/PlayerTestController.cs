@@ -72,7 +72,6 @@ public class PlayerTestController : MonoBehaviour
         ManageFear();
     }
 
- 
     void ManageFear() {
         if (fearLvl < 100) {
             fearLvl = currentTime / fearCoef;
