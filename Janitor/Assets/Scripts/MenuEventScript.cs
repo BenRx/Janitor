@@ -14,7 +14,7 @@ public class MenuEventScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.S)) {
+        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.R)) {
              SceneManager.LoadScene("ParticalTest", LoadSceneMode.Single);
         }
     }
