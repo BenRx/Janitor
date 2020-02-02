@@ -36,7 +36,7 @@ public class PlayerTestController : MonoBehaviour
         layer = ~layer;
         rb = GetComponent<Rigidbody>();
         Physics.IgnoreLayerCollision(0, 8);
-        initialPosition = transform.prosition;
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
