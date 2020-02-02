@@ -72,9 +72,10 @@ public class PickableObject : MonoBehaviour
 
         if (imPick && imLight && other.tag == "PickDownLight") {
             gameObject.transform.position = other.gameObject.transform.position;
+            gameObject.transform.parent = other.gameObject.transform;
+            gameObject.transform.rotation = Quaternion.identity;
     //        Debug.Log(other.gameObject.transform.rotation);
   //          gameObject.transform.rotation = new Quaternion(-other.gameObject.transform.rotation.x, other.gameObject.transform.rotation.y, other.gameObject.transform.rotation.z, other.gameObject.transform.rotation.w);
-          gameObject.transform.SetParent(other.gameObject.transform, false);
             light.SetActive(true);
         }
         if (imPick && !imLight && other.tag == "PickDownInterupt") {
