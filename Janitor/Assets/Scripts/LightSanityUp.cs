@@ -19,7 +19,7 @@ public class LightSanityUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
-            PlayerTestController.Instance.sanityGain = exteriorLightGainSanity;
+            //PlayerTestController.Instance.sanityGain = exteriorLightGainSanity;
             Debug.Log("J'entre");
         }
     }
@@ -27,14 +27,14 @@ public class LightSanityUp : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player") {
-            PlayerTestController.Instance.sanityGain = 0;
+            //PlayerTestController.Instance.sanityGain = 0;
             Debug.Log("J'sort");
         }
     }
 
     private void OnTriggerStay(Collider other) {
          if (other.tag == "Player") {
-            PlayerTestController.Instance.sanityGain = exteriorLightGainSanity;
+            //PlayerTestController.Instance.sanityGain = exteriorLightGainSanity;
             Debug.Log("J'entre");
         }   
     }
