@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 38063959}
   - component: {fileID: 38063958}
   - component: {fileID: 1763545962}
+  - component: {fileID: 826257290}
   m_Layer: 8
   m_Name: GlowStick
   m_TagString: Player
@@ -149,6 +150,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 18.85
   m_Center: {x: 0, y: -0.00000023841858, z: 0.0000076293945}
+--- !u!114 &826257290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38063956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0367bd7f6ed334769b9aa144c383336c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &554321992
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,10 +526,18 @@ MonoBehaviour:
   sanityMax: 200
   sanityGain: 0
   fearLvl: 0
+<<<<<<< HEAD
   fearCoef: 4
   maxSpeed: 1.5
   speed: 5
   jumpSpeed: 250
+=======
+  fearCoef: 100
+  isInSafeZone: 1
+  maxSpeed: 20
+  speed: 200
+  jumpSpeed: 10
+>>>>>>> 7b1ba63ac0e1d2bd876754e2df883496803d2b8d
   GlowStick: {fileID: 38063956}
 --- !u!54 &4960697139842698020
 Rigidbody:
@@ -532,7 +553,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &4960697141524267656
 GameObject:
