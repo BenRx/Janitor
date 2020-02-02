@@ -83,10 +83,12 @@ public class PlayerTestController : MonoBehaviour
 
     private void OnCollisionStay(Collision other) {
         if (other.gameObject.tag == "Case") {
-            if (Input.GetAxisRaw("Horizontal") > 0.5f && rb.velocity.x < maxSpeed) {
-                rb.AddForce(Vector3.right * speed);
-            } else if (Input.GetAxisRaw("Horizontal") < -0.5f && rb.velocity.x < maxSpeed) {
-                rb.AddForce(Vector3.left * speed);
+            Debug.Log("wut");
+            if (Input.GetAxisRaw("Horizontal") > 0.5f ) {
+                Debug.Log("ayaya");
+                rb.AddForce(Vector3.right * speed * 2f);
+            } else if (Input.GetAxisRaw("Horizontal") < -0.5f ) {
+                rb.AddForce(Vector3.left * speed * 2f);
             }
         }
     }

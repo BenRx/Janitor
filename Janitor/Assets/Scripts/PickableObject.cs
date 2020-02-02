@@ -12,6 +12,7 @@ public class PickableObject : MonoBehaviour
     private bool FadeOut = false;
     private bool imPick;
     public bool imLight = false;
+    public GameObject light;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,11 +65,17 @@ public class PickableObject : MonoBehaviour
         }
         if (other.tag == "PickUpZone") {
             imPick = PlayerTestController.Instance.PickMe(gameObject);
+            if (imLight && imPick) {
+                light.SetActive(false);
+            }
         }
 
         if (imPick && imLight && other.tag == "PickDownLight") {
             gameObject.transform.position = other.gameObject.transform.position;
-            gameObject.transform.parent = other.gameObject.transform;
+    //        Debug.Log(other.gameObject.transform.rotation);
+  //          gameObject.transform.rotation = new Quaternion(-other.gameObject.transform.rotation.x, other.gameObject.transform.rotation.y, other.gameObject.transform.rotation.z, other.gameObject.transform.rotation.w);
+          gameObject.transform.SetParent(other.gameObject.transform, false);
+            light.SetActive(true);
         }
         if (imPick && !imLight && other.tag == "PickDownInterupt") {
             gameObject.transform.position = other.gameObject.transform.position;
