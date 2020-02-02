@@ -19,6 +19,7 @@ public class PlayerTestController : MonoBehaviour
     public float speed = 10f;
     public float jumpSpeed = 100f;
     public GameObject GlowStick;
+    public float sanityGain = 0f;
 
     void Awake()
     {
@@ -70,7 +71,7 @@ public class PlayerTestController : MonoBehaviour
             gm.transform.position = new Vector3(GlowStick.transform.position.x + 0.3f, GlowStick.transform.position.y, GlowStick.transform.position.z);
             gm.transform.parent = GlowStick.transform;
             return true;
-        } else if (Input.Get)
+        }
         return false;
     }
 
