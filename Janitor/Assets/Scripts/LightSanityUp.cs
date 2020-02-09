@@ -7,7 +7,6 @@ public class LightSanityUp : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
             PlayerTestController.Instance.isInSafeZone = true;
-            Debug.Log("J'entre");
         }
     }
 
@@ -15,7 +14,6 @@ public class LightSanityUp : MonoBehaviour
     {
         if (other.tag == "Player") {
             PlayerTestController.Instance.isInSafeZone = false;
-            Debug.Log("J'sort");
         }
     }
 }

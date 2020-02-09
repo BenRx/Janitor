@@ -20,7 +20,6 @@ public class Pressure : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Case") {
-            Debug.Log("wut");
             action.makeAction();
         }
     }

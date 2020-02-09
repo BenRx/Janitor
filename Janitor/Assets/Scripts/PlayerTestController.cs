@@ -24,6 +24,10 @@ public class PlayerTestController : MonoBehaviour
     private float currentTime;
     private Animator animator;
     private bool isPush = false;
+    private bool jump = false;
+    private bool forceAdded = false;
+    private float timeBeforeJump = 0f;
+    public GameObject playerSkin;
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -46,7 +50,7 @@ public class PlayerTestController : MonoBehaviour
     }
 
     private bool IsGrounded() {
-       return Physics.Raycast(transform.position, -Vector3.up, 1.0f + 0.1f);
+       return Physics.Raycast(transform.position, -Vector3.up, 0.7f);
     }
 
 
@@ -55,18 +59,36 @@ public class PlayerTestController : MonoBehaviour
     {
         currentTime = Time.time - initialTime;
         if (Input.GetAxisRaw("Horizontal") > 0.5f && rb.velocity.x < maxSpeed) {
+            if (playerSkin.transform.localScale.z < 0)
+                playerSkin.transform.localScale = new Vector3(1f, 1f, 1f);
             rb.AddForce(Vector3.right * speed);
-        } else if (Input.GetAxisRaw("Horizontal") < -0.5f && rb.velocity.x < maxSpeed) {
+        } else if (Input.GetAxisRaw("Horizontal") < -0.5f && rb.velocity.x > -maxSpeed) {
+            if (playerSkin.transform.localScale.z > 0)
+                playerSkin.transform.localScale = new Vector3(1f, 1f, -1f);
             rb.AddForce(Vector3.left * speed);
         }
         if (Input.GetButtonDown("Jump") && IsGrounded()) {
-            rb.AddForce(Vector3.up * jumpSpeed);
+            jump = true;
         } 
         if (Input.GetButtonDown("Submit") || Input.GetKeyDown(KeyCode.R)) {
             ResetPlayer();
         }
-        animator.SetFloat("Speed", rb.velocity.x);
-        animator.SetBool("isGrounded", IsGrounded());
+        if (jump) {
+            timeBeforeJump += Time.deltaTime;
+            if (timeBeforeJump > 0.12f) {
+                if (!forceAdded) {
+                    rb.AddForce(Vector3.up * jumpSpeed);
+                    forceAdded = true;
+                }
+                if (IsGrounded() && timeBeforeJump > 0.15f) {
+                    timeBeforeJump = 0f;
+                    jump = false;
+                    forceAdded = false;
+                }
+            }
+        }
+        animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        animator.SetBool("isGrounded", !jump);
         animator.SetBool("IsPush", isPush);
         ManageSanity();
         ManageFear();
@@ -112,14 +134,12 @@ public class PlayerTestController : MonoBehaviour
         // Debug-draw all contact points and normals
             foreach (ContactPoint contact in other.contacts)
             {
-                Debug.Log(contact.normal);
-                Debug.Log(contact.normal.y > -1.5f && contact.normal.y < 1.5f);
+
                 if (contact.normal.y > -1.5f  && contact.normal.y < -0.5 || contact.normal.y > 0.5 && contact.normal.y < 1.5f) {
                     isPush = false;
                     return;
                 }
-                else{
-                    Debug.Log("NIOIIIIQUE");
+                else {
                     isPush = true;
                     return;
                 }
